@@ -12,8 +12,12 @@ import (
 
 
 func ListPost(c *gin.Context) {
+	page, _ := strconv.Atoi(c.Query("page"))
+	if page == 0 {
+		page = 1
+	}
   var list []models.Post
-	res, rows, err := logics.ListPost(list)
+	res, rows, err := logics.ListPost(list, page)
 	if err != nil {
     c.Redirect(http.StatusMovedPermanently, "/error?title=文章错误&href=/home&err=" + err.Error())
   }

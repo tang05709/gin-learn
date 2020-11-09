@@ -4,8 +4,10 @@ import (
 	"myweb/app/models"
 )
 
-func ListPost(datas []models.Post) ([]models.Post, int64, error) {
-	result := db.Order("id desc").Find(&datas)
+func ListPost(datas []models.Post, page int) ([]models.Post, int64, error) {
+	var pageSize = 2
+	offset := (page - 1) * pageSize
+	result := db.Order("id desc").Offset(offset).Limit(pageSize).Find(&datas)
 	return datas, result.RowsAffected, result.Error
 }
 
