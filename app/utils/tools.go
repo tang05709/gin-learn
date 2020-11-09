@@ -3,15 +3,18 @@ package utils
 import (
 	"math/rand"
 	"os"
+	"time"
 )
 
 func GetRoundName(size int) string {
-	var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-	str := make([]rune, size) 
-	for i := range str {
-		str[i] = letters[rand.Intn(len(letters))]
+	str := "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	bytes := []byte(str)
+	result := []byte{}
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	for i := 0; i < size; i++ {
+		result = append(result, bytes[r.Intn(len(bytes))])
 	}
-	return string(str)
+	return string(result)
 }
 
 func GetSaveDir(savePath string) string {

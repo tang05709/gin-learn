@@ -9,6 +9,5 @@ func main() {
 	core.Connection()
 	router := routers.InitRouter()
 	//静态资源
-	router.Static("app/static", "app/static")
 	router.Run(":8081")
 }
